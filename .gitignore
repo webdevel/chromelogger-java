@@ -4,10 +4,6 @@
 .project
 .classpath
 .DS_Store
-# Package Files #
-*.jar
-*.war
-*.ear
 .settings/
 target/
 bin/

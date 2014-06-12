@@ -62,7 +62,7 @@ public class ChromeLogger {
 
     public Map.Entry<String, String> getHeader() {
 
-        return getHeader(true);
+        return getHeader(false);
     }
 
     public Map.Entry<String, String> getHeader(boolean flush) {

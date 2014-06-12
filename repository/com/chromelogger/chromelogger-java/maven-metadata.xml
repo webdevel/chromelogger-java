@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <metadata>
-  <groupId>com.chromelogger-java</groupId>
+  <groupId>com.chromelogger</groupId>
   <artifactId>chromelogger-java</artifactId>
   <versioning>
     <versions>
       <version>1.0-SNAPSHOT</version>
     </versions>
-    <lastUpdated>20140612013056</lastUpdated>
+    <lastUpdated>20140612030618</lastUpdated>
   </versioning>
 </metadata>

@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <metadata modelVersion="1.1.0">
-  <groupId>com.chromelogger-java</groupId>
+  <groupId>com.chromelogger</groupId>
   <artifactId>chromelogger-java</artifactId>
   <version>1.0-SNAPSHOT</version>
   <versioning>
     <snapshot>
-      <timestamp>20140612.013056</timestamp>
+      <timestamp>20140612.030618</timestamp>
       <buildNumber>1</buildNumber>
     </snapshot>
-    <lastUpdated>20140612013056</lastUpdated>
+    <lastUpdated>20140612030618</lastUpdated>
     <snapshotVersions>
       <snapshotVersion>
         <extension>jar</extension>
-        <value>1.0-20140612.013056-1</value>
-        <updated>20140612013056</updated>
+        <value>1.0-20140612.030618-1</value>
+        <updated>20140612030618</updated>
       </snapshotVersion>
       <snapshotVersion>
         <extension>pom</extension>
-        <value>1.0-20140612.013056-1</value>
-        <updated>20140612013056</updated>
+        <value>1.0-20140612.030618-1</value>
+        <updated>20140612030618</updated>
       </snapshotVersion>
     </snapshotVersions>
   </versioning>

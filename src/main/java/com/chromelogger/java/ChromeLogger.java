@@ -30,10 +30,11 @@ import java.util.Map;
 
 import org.apache.commons.codec.binary.Base64;
 import org.json.JSONObject;
+import javax.servlet.http.HttpServletResponse;
 
 public class ChromeLogger {
 
-    private HeaderInterface headerInterface = null;
+    private HttpServletResponse headerInterface = null;
 
     private final String HEADER = "X-ChromeLogger-Data";
 
@@ -166,7 +167,7 @@ public class ChromeLogger {
         return null;
     }
 
-    public void setHeader(HeaderInterface headerInterface) {
+    public void setHeader(HttpServletResponse headerInterface) {
 
         this.headerInterface = headerInterface;
     }

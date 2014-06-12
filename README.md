@@ -17,10 +17,16 @@ This module is designed to be used during development and not in production.  It
 
     ![toggling](http://cdn.craig.is/img/chromelogger/toggle.gif)
 
-3. Install the Java library
+3. Install the Java library by adding the following to your Maven POM.
 
-    ```java
-    //TODO!
+    ```xml
+    <repositories>
+        <repository>
+            <id>com.chromelogger</id>
+            <name>chromelogger-java</name>
+            <url>https://raw.githubusercontent.com/shazron/chromelogger-java/master/repository</url>
+        </repository>
+    </repositories>
     ```
 4. Download the [Apache Commons codec](http://commons.apache.org/proper/commons-codec/download_codec.cgi), and install in your build path.
 
@@ -28,7 +34,29 @@ This module is designed to be used during development and not in production.  It
 4.  Start logging
 
     ```java
-    // TODO!
+    @Controller
+    @RequestMapping("/example")
+    public class ExampleController {
+
+        @Autowired
+        private OakRepository repository;
+    
+        @RequestMapping(value="/", method = RequestMethod.GET)
+        public String getExample(HttpServletResponse response, ModelMap model, ) {
+            
+            ChromeLogger logger = new ChromeLogger();
+
+            logger.setResponse(response);
+
+            Object[] logData = {model};
+
+            logger.info("chromelogger", logData);
+            logger.warn("chromelogger", logData);
+            logger.error("chromelogger", logData);
+
+            return "example";
+        }
+    }
     ```
 
 ## Sending Headers

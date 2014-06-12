@@ -3,11 +3,16 @@
  */
 package com.chromelogger.java;
 
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpServletResponseWrapper;
+
+import org.hamcrest.CoreMatchers;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 
 /**
@@ -203,13 +208,16 @@ public class ChromeLoggerTest {
     }
 
     /**
-     * Test method for {@link com.chromelogger.java.ChromeLogger#setHeader(com.chromelogger.java.HeaderInterface)}.
+     * Test method for {@link com.chromelogger.java.ChromeLogger#setResponse(javax.servlet.http.HttpServletResponse)}.
      */
     @Test
-    @Ignore
-    public final void testSetHeader() {
+    public final void testSetGetResponse() {
 
-        Assert.fail("Not yet implemented");
+        HttpServletResponseWrapper response = Mockito.mock(HttpServletResponseWrapper.class);
+        ChromeLogger chromeLogger = new ChromeLogger();
+        Assert.assertNull(chromeLogger.getResponse());
+        chromeLogger.setResponse(response);
+        Assert.assertThat(chromeLogger.getResponse(), CoreMatchers.instanceOf(HttpServletResponse.class));
     }
 
     /**

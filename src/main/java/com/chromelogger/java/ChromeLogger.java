@@ -34,7 +34,7 @@ import javax.servlet.http.HttpServletResponse;
 
 public class ChromeLogger {
 
-    private HttpServletResponse headerInterface = null;
+    private HttpServletResponse response = null;
 
     private final String HEADER = "X-ChromeLogger-Data";
 
@@ -45,6 +45,46 @@ public class ChromeLogger {
     public ChromeLogger() {
 
         reset();
+    }
+
+    public void reset() {
+
+        data = new HashMap<String, Object>() {
+
+            private static final long serialVersionUID = 1L;
+            {
+                put("version", VERSION);
+                put("columns", new String[] { "log", "backtrace", "type" });
+                put("rows", new ArrayList<Object>());
+            }
+        };
+    }
+
+    public Map.Entry<String, String> getHeader() {
+
+        return getHeader(true);
+    }
+
+    public Map.Entry<String, String> getHeader(boolean flush) {
+
+        JSONObject jo = new JSONObject(this.data);
+        byte[] jsonString;
+
+        try {
+            jsonString = jo.toString().getBytes("UTF-8");
+            Map.Entry<String, String> retVal = new AbstractMap.SimpleEntry<String, String>(HEADER, Base64.encodeBase64String(jsonString));
+            
+            if (flush) {
+                
+                reset();
+            }
+            return retVal;
+
+        } catch (Exception e) {
+            
+            e.printStackTrace();
+        }
+        return null;
     }
 
     private void internalLog(String logLevel, String backtrace, Object... logData) {
@@ -58,10 +98,10 @@ public class ChromeLogger {
             rows.add(row);
             data.put("rows", rows);
 
-            if (this.headerInterface != null) {
+            if (this.response != null) {
 
                 Map.Entry<String, String> header = getHeader();
-                this.headerInterface.setHeader(header.getKey(), header.getValue());
+                this.response.setHeader(header.getKey(), header.getValue());
             }
         }
     }
@@ -140,48 +180,13 @@ public class ChromeLogger {
         return this.VERSION;
     }
 
-    public Map.Entry<String, String> getHeader() {
+    public void setResponse(HttpServletResponse response) {
 
-        return getHeader(true);
+        this.response = response;
     }
-
-    public Map.Entry<String, String> getHeader(boolean flush) {
-
-        JSONObject jo = new JSONObject(this.data);
-        byte[] jsonString;
-
-        try {
-            jsonString = jo.toString().getBytes("UTF-8");
-            Map.Entry<String, String> retVal = new AbstractMap.SimpleEntry<String, String>(HEADER, Base64.encodeBase64String(jsonString));
-            
-            if (flush) {
-                
-                reset();
-            }
-            return retVal;
-
-        } catch (Exception e) {
-            
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    public void setHeader(HttpServletResponse headerInterface) {
-
-        this.headerInterface = headerInterface;
-    }
-
-    public void reset() {
-
-        data = new HashMap<String, Object>() {
-
-            private static final long serialVersionUID = 1L;
-            {
-                put("version", VERSION);
-                put("columns", new String[] { "log", "backtrace", "type" });
-                put("rows", new ArrayList<Object>());
-            }
-        };
+    
+    public HttpServletResponse getResponse() {
+        
+        return this.response;
     }
 }

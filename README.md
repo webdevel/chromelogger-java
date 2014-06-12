@@ -20,6 +20,13 @@ This module is designed to be used during development and not in production.  It
 3. Install the Java library by adding the following to your Maven POM.
 
     ```xml
+    <dependencies>
+        <dependency>
+            <groupId>com.chromelogger</groupId>
+            <artifactId>chromelogger-java</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
     <repositories>
         <repository>
             <id>com.chromelogger</id>
@@ -38,9 +45,6 @@ This module is designed to be used during development and not in production.  It
     @RequestMapping("/example")
     public class ExampleController {
 
-        @Autowired
-        private OakRepository repository;
-    
         @RequestMapping(value="/", method = RequestMethod.GET)
         public String getExample(HttpServletResponse response, ModelMap model, ) {
             
